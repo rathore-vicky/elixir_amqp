@@ -1,0 +1,41 @@
+{
+    "rabbit_version": "3.8",
+    "users": [
+        {
+         "name": "guest",
+         "password": "guest",
+         "tags": "administrator"
+        },
+        {
+            "name": "mqtt_user",
+            "password": "mqtt@1234",
+            "tags": "administrator"
+        }
+    ],
+    "vhosts": [
+        {
+            "name": "/"
+        }
+    ],
+    "permissions": [
+        {
+            "user": "guest",
+            "vhost": "/",
+            "configure": ".*",
+            "write": ".*",
+            "read": ".*"
+        },
+        {
+            "user": "mqtt_user",
+            "vhost": "/",
+            "configure": ".*",
+            "write": ".*",
+            "read": ".*"
+        }
+    ],
+    "parameters": [],
+    "policies": [],
+    "queues": [],
+    "exchanges": [],
+    "bindings": []
+}
