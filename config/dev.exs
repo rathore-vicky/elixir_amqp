@@ -1,14 +1,17 @@
-use Mix.Config
+import Config
 
 # Configure your database
 config :elixir_amqp, ElixirAMQP.Repo,
   username: "postgres",
   password: "postgres",
   database: "elixir_amqp_dev",
-  hostname: "localhost",
+  hostname: "postgres",
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
 
+config :elixir_amqp, :rabbitmq_config, url: "amqp://guest:guest@rabbitmq"
+
+config :elixir_amqp, :redis_config, url: "redis://redis:6379"
 # For development, we disable any cache and enable
 # debugging and code reloading.
 #
@@ -21,6 +24,16 @@ config :elixir_amqp, ElixirAMQPWeb.Endpoint,
   code_reloader: true,
   check_origin: false,
   watchers: []
+
+config :elixir_amqp, :csv_file_and_exchange,
+  list: [
+    {"./priv/data/dielectron.csv", "dielectron_exchange"},
+    {"./priv/data/memegenerator.csv", "memegenerator_exchange"},
+    {"./priv/data/twitchdata-update.csv", "twitchdata_exchange"}
+  ],
+  dielectron: [{"./priv/data/dielectron.csv", "dielectron_exchange"}],
+  memegenerator: [{"./priv/data/memegenerator.csv", "memegenerator_exchange"}],
+  twitchdata: [{"./priv/data/twitchdata-update.csv", "twitchdata_exchange"}]
 
 # ## SSL Support
 #

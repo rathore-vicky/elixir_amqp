@@ -1,6 +1,32 @@
 version: '3.7'
 
 services:
+  phoenix:
+      # The build parameters for this container.
+      build:
+         # Here we define that it should build from the current directory.
+         context: .
+         dockerfile: Dockerfile
+      environment:
+        # Variables to connect to our Postgres server.
+         POSTGRES_USER: postgres
+         POSTGRES_PASSWORD: postgres
+         POSTGRES_DATABASE: elixir_amqp_repo
+         POSTGRES_PORT: 5432
+         DATABASE_URL: postgresql://postgres:postgres@postgres:5432/postgres 
+      ports:
+         # Mapping the port to make the Phoenix app accessible outside of the container.
+         - '4000:4000'
+      depends_on:
+         # The DB container needs to be started before we start this container.
+         - rabbitmq
+         - postgres
+         - redis
+      volumes:
+        - .:/app
+      # command:
+      #   - "./entrypoint.sh"
+
   rabbitmq:
     image: rabbitmq:3.8-alpine
     ports:
@@ -14,11 +40,11 @@ services:
       - rabbitmq-data:/var/lib/rabbitmq
 
   postgres:
-    image: postgres:12.2
+    image: postgres:12-alpine
     ports:
       - '5433:5432'
     volumes:
-      - postgres-data:/var/lib/postgresql/data
+      - postgres-data:/var/lib/postgresql@12/data
     environment:
       POSTGRES_HOST: localhost
       POSTGRES_PASSWORD: postgres

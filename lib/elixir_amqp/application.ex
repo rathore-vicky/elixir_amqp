@@ -16,13 +16,16 @@ defmodule ElixirAMQP.Application do
       # Start the Endpoint (http/https)
       ElixirAMQPWeb.Endpoint,
 
+      # start the redis connection
+      ElixirAMQP.Redix,
+      # {Redix, host: "redix.myapp.com", name: :redix}
+
       # Start a worker by calling: ElixirAMQP.Worker.start_link(arg)
       # {ElixirAMQP.Worker, arg}
       {ElixirAMQP.ConnectionManager, []},
       {ElixirAMQP.Worker.DiElectron, []},
       {ElixirAMQP.Worker.MemeGenerator, []},
-      {ElixirAMQP.Worker.TwitchData, []},
-      ElixirAMQP.Redix
+      {ElixirAMQP.Worker.TwitchData, []}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

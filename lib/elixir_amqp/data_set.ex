@@ -23,12 +23,10 @@ defmodule ElixirAMQP.DataSet do
   end
 
   def get_or_store(topic, pagination_params) when pagination_params == %{} do
-    IO.inspect(pagination_params, label: "pagination_params 0")
     get_or_store(topic, %{page: 1, page_size: 10})
   end
 
   def get_or_store(topic, %{page: page, page_size: page_size} = pagination_params) do
-    IO.inspect(pagination_params, label: "pagination_params 1")
     key = "#{topic}_#{page}_#{page_size}"
 
     case Redix.command(["GET", key]) do

@@ -1,11 +1,15 @@
 defmodule ElixirAMQP.Redix do
+  @moduledoc false
+
   @pool_size 5
+
+  @redis_url Application.get_env(:elixir_amqp, :redis_config)[:url]
 
   def child_spec(_args) do
     # Specs for the Redix connections.
     children =
       for index <- 0..(@pool_size - 1) do
-        Supervisor.child_spec({Redix, name: :"redix_#{index}"}, id: {Redix, index})
+        Supervisor.child_spec({Redix, {@redis_url, [name: :"redix_#{index}"]}}, id: {Redix, index})
       end
 
     # Spec for the supervisor that will supervise the Redix connections.

@@ -30,14 +30,6 @@ defmodule ElixirAMQP.Worker.MemeGenerator do
   end
 
   def init(_opts) do
-    # {:ok, conn} = Connection.open("amqp://guest:guest@localhost")
-    # {:ok, chan} = Channel.open(conn)
-    # setup_queue(chan)
-
-    # # Limit unacknowledged messages to 10
-    # # :ok = Basic.qos(chan, prefetch_count: 10)
-    # # Register the GenServer process as a consumer
-    # {:ok, _consumer_tag} = Basic.consume(chan, @queue, [no_wait: true, no_ack: true])
     ConnectionManager.request_channel(__MODULE__)
     {:ok, %{chan: nil, consumer_tag: nil}}
   end
@@ -139,9 +131,9 @@ defmodule ElixirAMQP.Worker.MemeGenerator do
     # You might also want to catch :exit signal in production code.
     # Make sure you call ack, nack or reject otherwise consumer will stop
     # receiving messages.
-    exception ->
+    _exception ->
       # :ok = Basic.reject channel, tag, requeue: not redelivered
-      Logger.debug("Exception raised #{inspect(exception)}")
+      # Logger.debug("Exception raised #{inspect(exception)}")
       :ok
   end
 

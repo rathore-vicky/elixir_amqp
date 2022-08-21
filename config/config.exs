@@ -5,17 +5,17 @@
 # is restricted to this project.
 
 # General application configuration
-use Mix.Config
+import Config
 
 config :elixir_amqp,
   ecto_repos: [ElixirAMQP.Repo],
   generators: [binary_id: true]
 
 config :elixir_amqp, ElixirAMQP.Repo,
-  database: "elixir_amqp_repo",
   username: "postgres",
   password: "postgres",
-  hostname: "localhost",
+  hostname: "postgres",
+  port: 5432,
   log: false
 
 # Configures the endpoint
@@ -26,7 +26,9 @@ config :elixir_amqp, ElixirAMQPWeb.Endpoint,
   pubsub_server: ElixirAMQP.PubSub,
   live_view: [signing_salt: "Gcsa2GJc"]
 
-config :elixir_amqp, :rabbitmq_config, url: "amqp://guest:guest@localhost"
+config :elixir_amqp, :rabbitmq_config, url: "amqp://guest:guest@rabbitmq"
+
+config :elixir_amqp, :redis_config, url: "redis://redis:6379"
 
 # Configures Elixir's Logger
 config :logger, :console,

@@ -4,7 +4,7 @@ defmodule ElixirAMQP.ConnectionManager do
 
   require Logger
 
-  @url Application.get_env(:elixir_amqp, :rabbitmq_config)[:url]
+  @rabbitmq_url Application.get_env(:elixir_amqp, :rabbitmq_config)[:url]
 
   def start_link(args) do
     GenServer.start_link(__MODULE__, args, name: __MODULE__)
@@ -19,7 +19,7 @@ defmodule ElixirAMQP.ConnectionManager do
   end
 
   defp establish_new_connection do
-    case AMQP.Connection.open(@url) do
+    case AMQP.Connection.open(@rabbitmq_url) do
       {:ok, conn} ->
         Process.monitor(conn.pid)
         Logger.info("AMQP connection established")
