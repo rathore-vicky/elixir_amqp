@@ -1,4 +1,5 @@
 defmodule ElixirAMQP.Schema.Meme do
+  @moduledoc false
   use Ecto.Schema
   import Ecto.Changeset
 

@@ -1,10 +1,11 @@
 defmodule ElixirAMQP.ConnectionManager do
+  @moduledoc """
+    This module handles connection to RabbitMQ.
+  """
   use GenServer
   use AMQP
 
   require Logger
-
-  @rabbitmq_url Application.get_env(:elixir_amqp, :rabbitmq_config)[:url]
 
   def start_link(args) do
     GenServer.start_link(__MODULE__, args, name: __MODULE__)
@@ -19,7 +20,7 @@ defmodule ElixirAMQP.ConnectionManager do
   end
 
   defp establish_new_connection do
-    case AMQP.Connection.open(@rabbitmq_url) do
+    case AMQP.Connection.open(Application.get_env(:elixir_amqp, :rabbitmq_config)[:url]) do
       {:ok, conn} ->
         Process.monitor(conn.pid)
         Logger.info("AMQP connection established")

@@ -1,4 +1,5 @@
 defmodule ElixirAMQP.Schema.Twitch do
+  @moduledoc false
   use Ecto.Schema
   import Ecto.Changeset
 
@@ -46,7 +47,7 @@ defmodule ElixirAMQP.Schema.Twitch do
     |> validate_required(@fields)
     |> unique_constraint(:channel,
       name: :channel_name_is_unique,
-      message: "has already entry under channel_name"
+      message: "channel already exists"
     )
   end
 

@@ -28,12 +28,12 @@ config :elixir_amqp, ElixirAMQPWeb.Endpoint,
 config :elixir_amqp, :csv_file_and_exchange,
   list: [
     {"./priv/data/dielectron.csv", "dielectron_exchange"},
-    {"./priv/data/memegenerator.csv", "memegenerator_exchange"},
-    {"./priv/data/twitchdata-update.csv", "twitchdata_exchange"}
+    {"./priv/data/memegenerator.csv", "meme_exchange"},
+    {"./priv/data/twitchdata-update.csv", "twitch_exchange"}
   ],
   dielectron: [{"./priv/data/dielectron.csv", "dielectron_exchange"}],
-  memegenerator: [{"./priv/data/memegenerator.csv", "memegenerator_exchange"}],
-  twitchdata: [{"./priv/data/twitchdata-update.csv", "twitchdata_exchange"}]
+  memegenerator: [{"./priv/data/memegenerator.csv", "meme_exchange"}],
+  twitchdata: [{"./priv/data/twitchdata-update.csv", "twitch_exchange"}]
 
 # ## SSL Support
 #

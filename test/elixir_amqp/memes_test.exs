@@ -12,7 +12,7 @@ defmodule ElixirAMQP.MemesTest do
       base_name: "Spiderman Approves",
       page_url: "http://memegenerator.net/instance/10509464",
       md5_hash: "5be4b65cc32d3a57be5b6693bb519155",
-      file_size: 24093,
+      file_size: 24_093,
       alternate_text: "seems legit"
     }
     @update_attrs %{
@@ -22,7 +22,7 @@ defmodule ElixirAMQP.MemesTest do
       base_name: "Spiderman does not Approve",
       page_url: "http://memegenerator.net/instance/31502313",
       md5_hash: "1ce4b65cc32d3a57be5b6693bb519144",
-      file_size: 19000,
+      file_size: 19_000,
       alternate_text: "Fret not I stayed at a Holiday Inn Express last night"
     }
     @invalid_attrs %{
@@ -65,7 +65,7 @@ defmodule ElixirAMQP.MemesTest do
       assert meme.base_name == "Spiderman Approves"
       assert meme.page_url == "http://memegenerator.net/instance/10509464"
       assert meme.md5_hash == "5be4b65cc32d3a57be5b6693bb519155"
-      assert meme.file_size == 24093
+      assert meme.file_size == 24_093
       assert meme.alternate_text == "seems legit"
     end
 
@@ -86,7 +86,7 @@ defmodule ElixirAMQP.MemesTest do
 
       assert meme.page_url == "http://memegenerator.net/instance/31502313"
       assert meme.md5_hash == "1ce4b65cc32d3a57be5b6693bb519144"
-      assert meme.file_size == 19000
+      assert meme.file_size == 19_000
       assert meme.alternate_text == "Fret not I stayed at a Holiday Inn Express last night"
     end
 

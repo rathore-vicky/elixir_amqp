@@ -1,16 +1,16 @@
 defmodule ElixirAMQPWeb.CentralController do
+  @moduledoc false
   use ElixirAMQPWeb, :controller
 
-  alias ElixirAMQP.DataSet
+  alias ElixirAMQP.DataHandler
   alias ElixirAMQP.Validation
 
   action_fallback ElixirAMQPWeb.FallbackController
 
-  def list(conn, %{"topic" => topic} = params) do
+  def list(conn, params) do
     with {:ok, params} <- Validation.List.validate(params),
-         {pagination_params, _filters} <- Map.split(params, [:page_size, :page]) do
-      page = DataSet.get_or_store(topic, pagination_params)
-
+         {pagination_params, _filters} <- Map.split(params, [:page_size, :page]),
+         {:ok, page} <- DataHandler.get_or_store(params.topic, pagination_params) do
       conn
       |> put_status(200)
       |> render("index.json", entries: page.entries, page: page)

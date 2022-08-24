@@ -1,4 +1,5 @@
 defmodule ElixirAMQP.Worker.TwitchData do
+  @moduledoc false
   use GenServer
   use AMQP
 
@@ -7,7 +8,7 @@ defmodule ElixirAMQP.Worker.TwitchData do
 
   require Logger
 
-  @exchange "twitchdata_exchange"
+  @exchange "twitch_exchange"
   @queue "twitchdata_queue"
   @queue_error "#{@queue}_error"
 

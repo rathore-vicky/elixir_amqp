@@ -3,8 +3,9 @@ defmodule ElixirAMQP.Repo.Migrations.CreateDielectronTable do
 
   def change do
     create table(:dielectrons, primary_key: false) do
-      add :event, :bigint, primary_key: true
+      add :id, :uuid, primary_key: true
       add :run, :bigint, null: false
+      add :event, :bigint, primary_key: true
       add :m, :decimal, null: false
 
       add :e1, :decimal, null: false
@@ -27,5 +28,7 @@ defmodule ElixirAMQP.Repo.Migrations.CreateDielectronTable do
 
       timestamps(type: :utc_datetime_usec)
     end
+
+    create_if_not_exists(unique_index(:dielectrons, [:run, :event]))
   end
 end

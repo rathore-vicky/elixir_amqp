@@ -1,4 +1,5 @@
 defmodule ElixirAMQP.Worker.DiElectron do
+  @moduledoc false
   use GenServer
   use AMQP
 
@@ -81,7 +82,7 @@ defmodule ElixirAMQP.Worker.DiElectron do
     Logger.info("Channel available for process: #{__MODULE__}")
     setup_queue(chan)
 
-    {:ok, _consumer_tag} = Basic.consume(chan, @queue)
+    {:ok, _consumer_tag} = Basic.consume(chan, @queue, nil, no_ack: true, no_awk: true)
     {:noreply, %{state | chan: chan}}
   end
 
@@ -138,9 +139,9 @@ defmodule ElixirAMQP.Worker.DiElectron do
     # Make sure you call ack, nack or reject otherwise consumer will stop
     # receiving messages.
     _exception ->
-      # :ok = Basic.reject channel, tag, requeue: not redelivered
-      # Logger.debug("Exception raised #{inspect(exception)}")
-      :ok
+    # :ok = Basic.reject channel, tag, requeue: not redelivered
+    # Logger.debug("Exception raised #{inspect(exception)}")
+    :ok
   end
 
   defp insert_data(data) do

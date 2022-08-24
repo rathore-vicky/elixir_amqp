@@ -1,4 +1,5 @@
 defmodule ElixirAMQP.Worker.MemeGenerator do
+  @moduledoc false
   use GenServer
   use AMQP
 
@@ -7,8 +8,8 @@ defmodule ElixirAMQP.Worker.MemeGenerator do
 
   require Logger
 
-  @exchange "memegenerator_exchange"
-  @queue "memegenerator_queue"
+  @exchange "meme_exchange"
+  @queue "meme_queue"
   @queue_error "#{@queue}_error"
 
   @fields [
@@ -109,6 +110,7 @@ defmodule ElixirAMQP.Worker.MemeGenerator do
   end
 
   defp consume(_channel, _tag, _redelivered, payload) do
+    # String.split(payload, ",")
     [
       _id,
       _archived_url,
@@ -117,7 +119,7 @@ defmodule ElixirAMQP.Worker.MemeGenerator do
       _md5_hash,
       _file_size,
       _alternate_text
-    ] = data = String.split(payload, ",")
+    ] = data = Regex.split(~r{,}, payload, parts: 7)
 
     {:ok, _struct} = insert_data(data)
 

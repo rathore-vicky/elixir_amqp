@@ -1,4 +1,5 @@
 defmodule ElixirAMQPWeb.CentralView do
+  @moduledoc false
   use ElixirAMQPWeb, :view
 
   def render("index.json", %{entries: entries}) do

@@ -9,15 +9,14 @@ ADD config/ config
 
 RUN mix local.hex --force && \
     mix archive.install hex phx_new 1.5.7 --force && \
-  mix local.rebar --force
+    mix local.rebar --force && \
+    mix deps.get && \
+    mix deps.compile && \
+    mix compile
   
-
 ADD priv priv/
 ADD lib lib/
 
-RUN mix deps.get
-RUN mix deps.compile
-RUN mix compile
 
 RUN apk update && \
   apk add --no-cache \

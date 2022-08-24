@@ -8,7 +8,7 @@ defmodule ElixirAMQPWeb.Router do
   scope "/api", ElixirAMQPWeb do
     pipe_through :api
 
-    get "/dataset", CentralController, :list
+    get "/data", CentralController, :list
   end
 
   # Enables LiveDashboard only for development

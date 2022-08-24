@@ -1,5 +1,7 @@
 defmodule ElixirAMQP.Validation do
-  @moduledoc false
+  @moduledoc """
+    This module validate the external APIs parameteres.
+  """
 
   alias ElixirAMQP.Types.Topic
 

@@ -4,8 +4,8 @@ defmodule ElixirAMQP.DiElectrons do
   """
 
   import Ecto.Query, warn: false
-  alias ElixirAMQP.Repo
 
+  alias ElixirAMQP.Repo
   alias ElixirAMQP.Schema.Dielectron
 
   @doc """

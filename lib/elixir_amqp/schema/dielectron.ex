@@ -1,4 +1,5 @@
 defmodule ElixirAMQP.Schema.Dielectron do
+  @moduledoc false
   use Ecto.Schema
   import Ecto.Changeset
 
@@ -24,9 +25,10 @@ defmodule ElixirAMQP.Schema.Dielectron do
     :q2
   ]
 
-  @primary_key {:event, :integer, []}
+  @primary_key {:id, :binary_id, autogenerate: true}
   schema "dielectrons" do
     field(:run, :integer)
+    field(:event, :integer)
     field(:m, :decimal)
 
     field(:e1, :decimal)
@@ -55,9 +57,9 @@ defmodule ElixirAMQP.Schema.Dielectron do
     di_electron
     |> cast(attrs, @fields)
     |> validate_required(@fields)
-    |> unique_constraint(:event,
-      name: :event_id_is_unique,
-      message: "EventId is a unique constraint"
+    |> unique_constraint([:run, :event],
+      name: :dielectrons_event_run,
+      message: "run with event already exists"
     )
   end
 end

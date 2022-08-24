@@ -46,7 +46,8 @@ defmodule ElixirAMQP.MixProject do
       {:amqp, "~> 3.0"},
       {:scrivener_ecto, "~> 2.0"},
       {:redix, "~> 1.1"},
-      {:ecto_enum, "~> 1.4"}
+      {:ecto_enum, "~> 1.4"},
+      {:credo, "~> 1.6.5"}
     ]
   end
 

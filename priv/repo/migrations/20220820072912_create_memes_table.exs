@@ -9,7 +9,7 @@ defmodule ElixirAMQP.Repo.Migrations.CreateMemesTable do
       add :page_url, :varchar, size: 255, null: false
       add :md5_hash, :varchar, size: 255, null: false
       add :file_size, :bigint, null: false
-      add :alternate_text, :varchar, size: 255, null: false
+      add :alternate_text, :text, null: false
 
       timestamps(type: :utc_datetime_usec)
     end

@@ -7,7 +7,8 @@ defmodule ElixirAMQP do
   if it comes from the database, an external API or others.
   """
 
-  alias ElixirAMQP.DataSet
+  alias ElixirAMQP.DataHandler
 
-  defdelegate dispatch_data, to: DataSet
+  @spec dispatch_data() :: :ok
+  defdelegate dispatch_data, to: DataHandler
 end

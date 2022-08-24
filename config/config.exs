@@ -16,6 +16,7 @@ config :elixir_amqp, ElixirAMQP.Repo,
   password: "postgres",
   hostname: "postgres",
   port: 5432,
+  pool_size: 20,
   log: false
 
 # Configures the endpoint
@@ -41,12 +42,12 @@ config :phoenix, :json_library, Jason
 config :elixir_amqp, :csv_file_and_exchange,
   list: [
     {"./priv/data/dielectron.csv", "dielectron_exchange"},
-    {"./priv/data/memegenerator.csv", "memegenerator_exchange"},
-    {"./priv/data/twitchdata-update.csv", "twitchdata_exchange"}
+    {"./priv/data/memegenerator.csv", "meme_exchange"},
+    {"./priv/data/twitchdata-update.csv", "twitch_exchange"}
   ],
   dielectron: [{"./priv/data/dielectron.csv", "dielectron_exchange"}],
-  memegenerator: [{"./priv/data/memegenerator.csv", "memegenerator_exchange"}],
-  twitchdata: [{"./priv/data/twitchdata-update.csv", "twitchdata_exchange"}]
+  memegenerator: [{"./priv/data/memegenerator.csv", "meme_exchange"}],
+  twitchdata: [{"./priv/data/twitchdata-update.csv", "twitch_exchange"}]
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

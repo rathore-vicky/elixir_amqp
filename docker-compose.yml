@@ -24,8 +24,6 @@ services:
          - redis
       volumes:
         - .:/app
-      # command:
-      #   - "./entrypoint.sh"
 
   rabbitmq:
     image: rabbitmq:3.8-alpine
